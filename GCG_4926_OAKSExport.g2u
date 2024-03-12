@@ -1,0 +1,1030 @@
+Program.Sub.ScreenSU.Start
+Gui.FOaksMaint..Create
+Gui.FOaksMaint..Caption("OAKS 28 Nightly Export Maintenance")
+Gui.FOaksMaint..Size(7170,12810)
+Gui.FOaksMaint..MinX(0)
+Gui.FOaksMaint..MinY(0)
+Gui.FOaksMaint..Position(0,0)
+Gui.FOaksMaint..BackColor(-2147483633)
+Gui.FOaksMaint..MousePointer(0)
+Gui.FOaksMaint..Event(UnLoad,FOaksMaint_UnLoad)
+Gui.FOaksMaint.GsGCCompSel.Create(GsGridControl)
+Gui.FOaksMaint.GsGCCompSel.Size(6915,10185)
+Gui.FOaksMaint.GsGCCompSel.Position(15,1440)
+Gui.FOaksMaint.GsGCCompSel.Event(CellValueChanged,GsGCCompSel_CellValueChanged)
+Gui.FOaksMaint.txtXPLoc.Create(TextBox,"",True,5190,300,0,1245,180,True,0,"Arial",8,-2147483643,1)
+Gui.FOaksMaint.lbl1.Create(Label,"Export Folder:",True,1200,255,0,15,270,True,0,"Arial",8,-2147483633,0)
+Gui.FOaksMaint.lbl2.Create(Label,"Active company codes for export",True,5070,255,0,15,1155,True,0,"Arial",8,-2147483633,0)
+Gui.FOaksMaint.lbl2.FontStyle(True,False,False,False,False)
+Gui.FOaksMaint.cmdFoldSel.Create(Button)
+Gui.FOaksMaint.cmdFoldSel.Size(375,345)
+Gui.FOaksMaint.cmdFoldSel.Position(6540,150)
+Gui.FOaksMaint.cmdFoldSel.Event(Click,cmdFoldSel_Click)
+Gui.FOaksMaint.cmdFoldSel.Caption("^")
+Gui.FOaksMaint.cmdSaveXpPath.Create(Button)
+Gui.FOaksMaint.cmdSaveXpPath.Size(1965,375)
+Gui.FOaksMaint.cmdSaveXpPath.Position(15,600)
+Gui.FOaksMaint.cmdSaveXpPath.Caption("Save Export Path")
+Gui.FOaksMaint.cmdSaveXpPath.Event(Click,cmdSaveXpPath_Click)
+Gui.FOaksMaint.cmdSaveActComp.Create(Button)
+Gui.FOaksMaint.cmdSaveActComp.Size(1965,375)
+Gui.FOaksMaint.cmdSaveActComp.Position(15,11745)
+Gui.FOaksMaint.cmdSaveActComp.Caption("Save Active Companies")
+Gui.FOaksMaint.cmdSaveActComp.Event(Click,cmdSaveActComp_Click)
+Gui.FDateSel..Create
+Gui.FDateSel..Caption("Date Selection for Export")
+Gui.FDateSel..Size(4395,1455)
+Gui.FDateSel..MinX(0)
+Gui.FDateSel..MinY(0)
+Gui.FDateSel..Position(0,0)
+Gui.FDateSel..BackColor(-2147483633)
+Gui.FDateSel..MousePointer(0)
+Gui.FDateSel..Sizeable(False)
+Gui.FDateSel..Event(UnLoad,UnloadAll)
+Gui.FDateSel.lbl1.Create(Label,"Select Date Invoiced",True,1590,255,0,90,180,True,0,"Arial",8,-2147483633,0)
+Gui.FDateSel.dtp1.Create(DatePicker)
+Gui.FDateSel.dtp1.Size(1935,285)
+Gui.FDateSel.dtp1.Position(2205,90)
+Gui.FDateSel.cmdGenExp.Create(Button)
+Gui.FDateSel.cmdGenExp.Size(1515,375)
+Gui.FDateSel.cmdGenExp.Position(90,495)
+Gui.FDateSel.cmdGenExp.Caption("Generate Export")
+Gui.FDateSel.cmdGenExp.Event(Click,cmdGenExp_Click)
+Gui.FStatusCheck..Create
+Gui.FStatusCheck..Caption("Export Status Check")
+Gui.FStatusCheck..Size(8250,12270)
+Gui.FStatusCheck..MinX(0)
+Gui.FStatusCheck..MinY(0)
+Gui.FStatusCheck..Position(0,0)
+Gui.FStatusCheck..BackColor(-2147483633)
+Gui.FStatusCheck..MousePointer(0)
+Gui.FStatusCheck..Sizeable(False)
+Gui.FStatusCheck..Event(UnLoad,UnloadAll)
+Gui.FStatusCheck.frame28.Create(Frame)
+Gui.FStatusCheck.frame28.Size(7965,5730)
+Gui.FStatusCheck.frame28.Position(105,105)
+Gui.FStatusCheck.frame28.Caption("INF28 Export Status Check")
+Gui.FStatusCheck.frame28.FontSize(10)
+Gui.FStatusCheck.frame28.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day1.Create(Label,"Label",True,2085,255,0,90,960,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day1.Parent("frame28")
+Gui.FStatusCheck.lbl28day1.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day1.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day1.Event(DblClick,lbl28day1_DblClick)
+Gui.FStatusCheck.txtErrorDisp28.Create(TextboxM)
+Gui.FStatusCheck.txtErrorDisp28.Size(5565,5070)
+Gui.FStatusCheck.txtErrorDisp28.Position(2370,600)
+Gui.FStatusCheck.txtErrorDisp28.Parent("frame28")
+Gui.FStatusCheck.lblStatusHD28.Create(Label,"Status for date",True,3630,255,0,2385,345,True,0,"Arial",10,-2147483633,0)
+Gui.FStatusCheck.lblStatusHD28.Parent("frame28")
+Gui.FStatusCheck.lblStatusHD28.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day2.Create(Label,"Label",True,2085,255,0,90,1515,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day2.Parent("frame28")
+Gui.FStatusCheck.lbl28day2.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day2.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day2.Event(DblClick,lbl28day2_DblClick)
+Gui.FStatusCheck.lbl28day3.Create(Label,"Label",True,2085,255,0,90,2070,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day3.Parent("frame28")
+Gui.FStatusCheck.lbl28day3.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day3.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day3.Event(DblClick,lbl28day3_DblClick)
+Gui.FStatusCheck.lbl28day4.Create(Label,"Label",True,2085,255,0,90,2625,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day4.Parent("frame28")
+Gui.FStatusCheck.lbl28day4.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day4.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day4.Event(DblClick,lbl28day4_DblClick)
+Gui.FStatusCheck.lbl28day5.Create(Label,"Label",True,2085,255,0,90,3180,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day5.Parent("frame28")
+Gui.FStatusCheck.lbl28day5.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day5.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day5.Event(DblClick,lbl28day5_DblClick)
+Gui.FStatusCheck.lbl28day6.Create(Label,"Label",True,2085,255,0,90,3735,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day6.Parent("frame28")
+Gui.FStatusCheck.lbl28day6.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day6.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day6.Event(DblClick,lbl28day6_DblClick)
+Gui.FStatusCheck.lbl28day7.Create(Label,"Label",True,2085,255,0,90,4335,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl28day7.Parent("frame28")
+Gui.FStatusCheck.lbl28day7.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl28day7.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl28day7.Event(DblClick,lbl28day7_DblClick)
+Gui.FStatusCheck.frame02.Create(Frame)
+Gui.FStatusCheck.frame02.Size(7965,5730)
+Gui.FStatusCheck.frame02.Position(105,5970)
+Gui.FStatusCheck.frame02.Caption("INF02 Export Status Check")
+Gui.FStatusCheck.frame02.FontSize(10)
+Gui.FStatusCheck.frame02.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day1.Create(Label,"Label",True,2085,255,0,90,960,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day1.Parent("frame02")
+Gui.FStatusCheck.lbl02day1.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day1.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day1.Event(DblClick,lbl02day1_DblClick)
+Gui.FStatusCheck.lbl02day2.Create(Label,"Label",True,2085,255,0,90,1515,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day2.Parent("frame02")
+Gui.FStatusCheck.lbl02day2.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day2.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day2.Event(DblClick,lbl02day2_DblClick)
+Gui.FStatusCheck.lbl02day3.Create(Label,"Label",True,2085,255,0,90,2070,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day3.Parent("frame02")
+Gui.FStatusCheck.lbl02day3.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day3.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day3.Event(DblClick,lbl02day3_DblClick)
+Gui.FStatusCheck.lbl02day4.Create(Label,"Label",True,2085,255,0,90,2625,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day4.Parent("frame02")
+Gui.FStatusCheck.lbl02day4.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day4.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day4.Event(DblClick,lbl02day4_DblClick)
+Gui.FStatusCheck.lbl02day5.Create(Label,"Label",True,2085,255,0,90,3180,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day5.Parent("frame02")
+Gui.FStatusCheck.lbl02day5.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day5.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day5.Event(DblClick,lbl02day5_DblClick)
+Gui.FStatusCheck.lbl02day6.Create(Label,"Label",True,2085,255,0,90,3735,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day6.Parent("frame02")
+Gui.FStatusCheck.lbl02day6.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day6.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day6.Event(DblClick,lbl02day6_DblClick)
+Gui.FStatusCheck.lbl02day7.Create(Label,"Label",True,2085,255,0,90,4335,True,0,"Arial",12,-2147483633,0)
+Gui.FStatusCheck.lbl02day7.Parent("frame02")
+Gui.FStatusCheck.lbl02day7.ForeColor(-2147483640)
+Gui.FStatusCheck.lbl02day7.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.lbl02day7.Event(DblClick,lbl02day7_DblClick)
+Gui.FStatusCheck.lblStatusHD02.Create(Label,"Status for date",True,3630,255,0,2385,345,True,0,"Arial",10,-2147483633,0)
+Gui.FStatusCheck.lblStatusHD02.Parent("frame02")
+Gui.FStatusCheck.lblStatusHD02.FontStyle(True,False,False,False,False)
+Gui.FStatusCheck.txtErrorDisp02.Create(TextboxM)
+Gui.FStatusCheck.txtErrorDisp02.Size(5565,5070)
+Gui.FStatusCheck.txtErrorDisp02.Position(2370,600)
+Gui.FStatusCheck.txtErrorDisp02.Parent("frame02")
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.sXPPath.Declare(String)
+v.Global.bSaveMsg.Declare(Boolean)
+v.Global.dDate.Declare(Date)
+v.Global.dDate.Set(v.Ambient.Date)
+v.Global.sINF28.Declare(string)
+v.Global.sINF02.Declare(string)
+v.Global.iSEQ28.declare(long,0)
+v.Global.iSEQ02.declare(long,0)
+v.Global.s28Out.Declare(string)
+v.Global.s28OutPath.Declare(string)
+v.Global.s02Out.Declare(string)
+v.Global.s02OutPath.Declare(string)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+v.Local.sFilePath.Declare(String)
+v.Local.bExists.Declare(boolean)
+V.Local.sDate.Declare(String)
+V.Local.sError28.Declare(String)
+V.Local.sError02.Declare(String)
+V.Local.sSuccess28.Declare(String)
+V.Local.sSuccess02.Declare(String)
+
+V.Local.bError.Declare(Boolean)
+
+V.Local.bSuccess.Declare(Boolean)
+'check if folders exist. create folders if they don't. this includes status check folders backup folders etc.
+f.Intrinsic.string.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sFilePath)
+
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.string.Build("{0}\OAKS\28_Status",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+v.Global.s28OutPath.Set(v.Local.sFilePath)
+f.Intrinsic.string.Build("{0}\OAKS\02_Status",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+v.Global.s02OutPath.Set(v.Local.sFilePath)
+f.Intrinsic.string.Build("{0}\OAKS\28_Backup",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.string.Build("{0}\OAKS\02_Backup",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+
+
+f.odbc.Connection!conx.OpenConnection(v.Ambient.PDSN,v.Ambient.PUser,v.Ambient.PPass)
+Function.ODBC.Connection!conxc.OpenCommonConnection
+
+f.Intrinsic.Control.If(v.Caller.Switches,=,"M")
+'launch maintenance
+	f.Intrinsic.Control.CallSub(LoadMaint)
+'launch statuscheck
+f.Intrinsic.Control.ElseIf(v.Caller.Switches,=,"S")
+	f.Intrinsic.Control.CallSub(StatusCheckPop)
+
+f.Intrinsic.Control.ElseIf(v.Caller.Switches,=,"O")
+'launch from custom menu item
+	gui.FDateSel..Show
+
+f.Intrinsic.Control.Else
+'unattended run
+	v.local.sDate.set(v.Global.dDate.String)
+'build status file names and delete them if they already exist.
+	f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+	f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+	f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+	
+	
+	f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+	f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+	f.Intrinsic.Control.If(v.Local.bError,=,True)
+		f.Intrinsic.File.DeleteFile(v.Local.sError28)
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.If(v.Local.bSuccess,=,True)
+		f.Intrinsic.File.DeleteFile(v.Local.sSuccess28)
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.CallSub(ExportFiles)
+	f.Intrinsic.Control.CallSub(UnloadAll)
+	
+f.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.StatusCheckPop.Start
+V.Local.dDate.Declare(Date)
+V.Local.sDate.Declare(String)
+V.Local.sError28.Declare(String)
+V.Local.sError02.Declare(String)
+V.Local.sSuccess28.Declare(String)
+V.Local.sSuccess02.Declare(String)
+v.Local.sDisp.Declare(String)
+v.Local.sDispLab.Declare(String)
+
+V.Local.bError.Declare(Boolean)
+
+V.Local.bSuccess.Declare(Boolean)
+
+
+'populate Lables
+gui.FStatusCheck.lbl02day1.Caption(v.Global.dDate.String)
+gui.FStatusCheck.lbl28day1.Caption(v.Global.dDate.string)
+v.local.sDate.set(v.Global.dDate.String)
+'fetch errror files
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+'if error. Display in Red. 
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day1.ForeColor("255")
+	f.Intrinsic.File.File2String(v.Local.sError28,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp28.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD28.ForeColor("255")
+	gui.FStatusCheck.txtErrorDisp28.ForeColor("255")
+	
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day1.ForeColor("32768")
+	f.Intrinsic.File.File2String(v.Local.sSuccess28,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp28.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD28.ForeColor("32768")
+	gui.FStatusCheck.txtErrorDisp28.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.txtErrorDisp28.Text("No Status File available for display for the current date.")
+	gui.FStatusCheck.lbl28day1.enabled(False)
+f.Intrinsic.Control.EndIf
+
+
+f.Intrinsic.String.build("Status for date {0}",v.Global.dDate.String,v.Local.sDispLab)
+gui.FStatusCheck.lblStatusHD28.Caption(v.Local.sDispLab)
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day1.ForeColor("255")
+	f.Intrinsic.File.File2String(v.Local.sError02,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp02.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD02.ForeColor("255")
+	gui.FStatusCheck.txtErrorDisp02.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day1.ForeColor("32768")
+	f.Intrinsic.File.File2String(v.Local.sSuccess02,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp02.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD02.ForeColor("32768")
+	gui.FStatusCheck.txtErrorDisp02.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.txtErrorDisp02.Text("No Status File available for display for the current date.")
+	gui.FStatusCheck.lbl02day1.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.String.build("Status for date {0}",v.Global.dDate.String,v.Local.sDispLab)
+gui.FStatusCheck.lblStatusHD02.Caption(v.Local.sDispLab)
+
+'if error. Dipaly in Red. note that we are changing the date and going back 7 days where this step is repeated for each day
+Function.Intrinsic.Date.DateAdd("D",-1,v.Global.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day2.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day2.Caption(v.Local.dDate.String)
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day2.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day2.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day2.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day2.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day2.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day2.enabled(False)
+f.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Date.DateAdd("D",-1,v.Local.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day3.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day3.Caption(v.Local.dDate.String)
+
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day3.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day3.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day3.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day3.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day3.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day3.enabled(False)
+f.Intrinsic.Control.EndIf
+
+
+
+
+Function.Intrinsic.Date.DateAdd("D",-1,v.Local.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day4.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day4.Caption(v.Local.dDate.String)
+
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day4.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day4.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day4.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day4.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day4.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day4.enabled(False)
+f.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Date.DateAdd("D",-1,v.Local.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day5.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day5.Caption(v.Local.dDate.String)
+
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day5.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day5.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day5.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day5.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day5.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day5.enabled(False)
+f.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Date.DateAdd("D",-1,v.Local.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day6.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day6.Caption(v.Local.dDate.String)
+
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day6.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day6.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day6.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day6.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day6.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day6.enabled(False)
+f.Intrinsic.Control.EndIf
+
+Function.Intrinsic.Date.DateAdd("D",-1,v.Local.dDate,v.Local.dDate)
+
+gui.FStatusCheck.lbl02day7.Caption(v.Local.dDate.String)
+gui.FStatusCheck.lbl28day7.Caption(v.Local.dDate.String)
+
+v.local.sDate.set(v.Local.dDate.String)
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl28day7.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl28day7.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl28day7.enabled(False)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	gui.FStatusCheck.lbl02day7.ForeColor("255")
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	gui.FStatusCheck.lbl02day7.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.lbl02day7.enabled(False)
+f.Intrinsic.Control.EndIf
+
+gui.FStatusCheck..SetFocus
+gui.FStatusCheck..Show
+
+Program.Sub.StatusCheckPop.End
+
+Program.Sub.UnloadAll.Start
+f.ODBC.Connection!conx.Close
+f.ODBC.Connection!conxc.Close
+f.Intrinsic.Control.End
+
+Program.Sub.UnloadAll.End
+
+Program.Sub.cmdFoldSel_Click.Start
+v.local.sFolder.Declare(string)
+v.Local.sXPPath.Declare(String)
+v.Local.sXPPath.Set(v.Screen.FOaksMaint!txtXPLoc.text.trim)
+f.Intrinsic.UI.FolderBrowser("Select a Destination Folder",v.Local.sFolder)
+f.Intrinsic.Control.If(v.Local.sFolder,<>,"***CANCEL***")
+	gui.FOaksMaint.txtXPLoc.Text(v.Local.sFolder)
+f.Intrinsic.Control.Else	
+	gui.FOaksMaint.txtXPLoc.Text(v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+Program.Sub.cmdFoldSel_Click.End
+
+Program.Sub.LoadMaint.Start
+'load the maitenance options grid.
+f.Intrinsic.Control.CallSub(RefreshCompanyList)
+f.Intrinsic.Control.CallSub(GetXPPath,"ConName","Maint")
+f.Data.DataTable.CreateFromSQL("ActiveCompDT","conx","Select EXP_ENABLED,COCODE,COMPANYNAME from GCG_4926_CompMaint order by EXP_ENABLED Desc, COCODE ",true)
+f.Data.DataView.Create("ActiveCompDT","ActiveCompVw",22)
+gui.FOaksMaint.GsGCCompSel.AddGridviewFromDataview("ActiveCompGRID","ActiveCompDT","ActiveCompVw")
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "ReadOnly", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "AllowEdit", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "caption", "Export Enabled")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "MinWidth",120)
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "ReadOnly", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "AllowEdit", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "caption", "Company Code")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "MinWidth",120)
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "ReadOnly", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "AllowEdit", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "caption", "Company Name")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "MinWidth",360)
+
+
+gui.FOaksMaint.GsGCCompSel.MainView("ActiveCompGRID")
+gui.FOaksMaint..SetFocus
+gui.FOaksMaint..Show
+Program.Sub.LoadMaint.End
+
+Program.Sub.GetXPPath.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.Exists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.Local.bExists,=,true)
+	f.Intrinsic.file.File2String(v.Local.sFilePath,v.Local.sXPPath)
+f.Intrinsic.Control.Else
+	f.Intrinsic.string.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.If(v.Args.ConName,=,"Maint")
+	gui.FOaksMaint.txtXPLoc.text(v.Local.sXPPath)
+f.Intrinsic.Control.Elseif(v.Args.ConName,=,"XP")
+	v.Global.sXPPath.Set(v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.ExitSub
+
+
+Program.Sub.GetXPPath.End
+
+Program.Sub.RefreshCompanyList.Start
+v.Local.sCompListAct.declare(String)
+v.Local.sCompListMaint.Declare(string)
+v.Local.sSql.declare(String)
+'this done prior to loading the maintenance screen. it pulls in any new companies that are created and/or deletes any company that has been deleted
+f.odbc.Connection!conxc.ExecuteAndReturn("Select distinct COCODE from COMPANIES",v.Local.sCompListAct)
+
+f.Intrinsic.String.Replace(v.Local.sCompListAct,"#$#","','",v.Local.sCompListAct)
+f.Intrinsic.String.Build("'{0}'",v.Local.sCompListAct,v.Local.sCompListAct)
+
+f.odbc.Connection!conx.ExecuteAndReturn("Select distinct COCODE from GCG_4926_CompMaint",v.Local.sCompListMaint)
+f.Intrinsic.String.Replace(v.Local.sCompListMaint,"#$#","','",v.Local.sCompListMaint)
+f.Intrinsic.String.Build("'{0}'",v.Local.sCompListMaint,v.Local.sCompListMaint)
+
+
+f.Intrinsic.string.Build("Select COCODE,COMPANYNAME,cast(0 as bit) as EXP_ENABLED from COMPANIES where COCODE not in ({0})",v.Local.sCompListMaint,v.Local.sSql)
+f.Data.DataTable.CreateFromSQL("AddCompDT","conxc",v.Local.sSql)
+
+f.Intrinsic.Control.If(v.DataTable.AddCompDT.RowCount,>,0)
+	f.Data.DataTable.SaveToDB("AddCompDT","conx","GCG_4926_CompMaint","COCODE",256,"")
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.string.Build("Delete from GCG_4926_CompMaint where COCODE not in ({0})",v.Local.sCompListAct,v.Local.sSql)
+f.ODBC.Connection!conx.execute(v.Local.sSql)
+f.Intrinsic.Control.ExitSub
+
+
+Program.Sub.RefreshCompanyList.End
+
+Program.Sub.cmdSaveXpPath_Click.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+gui.FOaksMaint..Enabled(false)
+'saves XP path in the maintenance screen.
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+v.Local.sXPPath.Set(v.Screen.FOaksMaint!txtXPLoc.text)
+f.Intrinsic.file.DirExists(v.Local.sXPPath,v.Local.bExists)
+f.Intrinsic.Control.If(v.Local.bExists,=,false)
+	f.Intrinsic.UI.Msgbox("The path specified does not exist! Please enter a valid Fully Qualified path.")
+f.Intrinsic.Control.Else
+	f.Intrinsic.File.String2File(v.Local.sFilePath,v.Local.sXPPath)
+	f.Intrinsic.UI.Msgbox("Export Path has been Saved!")
+f.Intrinsic.Control.EndIf
+gui.FOaksMaint..Enabled(True)
+gui.FOaksMaint..SetFocus
+f.Intrinsic.Control.ExitSub
+
+Program.Sub.cmdSaveXpPath_Click.End
+
+Program.Sub.cmdSaveActComp_Click.Start
+gui.FOaksMaint..Enabled(False)
+f.Intrinsic.Control.If(v.Global.bSaveMsg,=,true)
+	'saves the active company list from the grid in the maintenance screen
+	Function.Data.DataTable.SaveToDB("ActiveCompDT","conx","GCG_4926_CompMaint","COCODE",256)
+	f.Intrinsic.UI.Msgbox("Active Companies have been Saved!")
+	v.Global.bSaveMsg.Set(False)
+f.Intrinsic.Control.Else
+	f.Intrinsic.UI.Msgbox("No Changes have been made to be saved!")
+f.Intrinsic.Control.EndIf
+gui.FOaksMaint..Enabled(True)
+f.intrinsic.Control.ExitSub
+
+Program.Sub.cmdSaveActComp_Click.End
+
+Program.Sub.GsGCCompSel_CellValueChanged.Start
+v.Global.bSaveMsg.Set(true)
+Program.Sub.GsGCCompSel_CellValueChanged.End
+
+Program.Sub.FOaksMaint_UnLoad.Start
+V.Local.sRet.Declare(String)
+f.Intrinsic.Control.If(v.Global.bSaveMsg,=,true)
+	F.Intrinsic.UI.Msgbox("Changes were made in the Active Company Grid. Do you wish to save these changes before exiting?","Save Data?",3,V.Local.sRet)
+	f.Intrinsic.Control.If(v.Local.sRet,=,2)
+			f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.ElseIf(v.Local.sRet,=,6)
+		f.Intrinsic.Control.CallSub(cmdSaveActComp_Click)	
+	f.Intrinsic.Control.Else
+		v.Global.bSaveMsg.Set(false)			
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.CallSub(UnloadAll)
+
+Program.Sub.FOaksMaint_UnLoad.End
+
+Program.Sub.ExportFiles.Start
+v.Local.sINF28FName.Declare(String)
+v.Local.sINF02FName.Declare(String)
+v.Local.sSQL.Declare(string)
+V.Local.iCount.Declare(long)
+v.Local.sCmpCode.Declare(String)
+v.Local.sDate.Declare(String)
+v.Local.sSDate.Declare(String)
+v.Local.sSYDate.Declare(String)
+v.Local.sLDate.Declare(String)
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+f.Intrinsic.Control.Try
+f.Intrinsic.ui.InvokeWaitDialog("Export is running.")
+
+'get CP Path
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.file.Exists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(V.Local.bExists,=,false)
+	f.Intrinsic.String.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sXPPath)
+	f.Intrinsic.File.String2File(v.Local.sFilePath,v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.File.File2String(v.Local.sFilePath,v.Local.sXPPath)
+
+f.Intrinsic.string.Format(v.Global.dDate,"mmddyy",v.Local.sSDate)
+f.Intrinsic.string.Format(v.Global.dDate,"mmddyyyy",v.Local.sSYDate)
+
+v.Local.sLDate.Set(v.Global.dDate.PervasiveDate)
+'v.Local.sLDate.Set("2016-09-14")
+'set output file names
+f.Intrinsic.string.Build("{0}\INFARI28A{1}.dat",v.Local.sXPPath,"DRC01OPI",v.Local.sINF28FName)
+f.Intrinsic.string.Build("{0}\INFAPI02A{1}.dat",v.Local.sXPPath,v.Local.sSYDate,v.Local.sINF02FName)
+
+
+'get active company list from custom tables
+f.Data.DataTable.CreateFromSQL("ActiveComp","conx","Select COCODE from GCG_4926_CompMaint where EXP_ENABLED = 1")
+'loop through it and grab date for each of the active companies.
+f.Intrinsic.Control.For(v.Local.iCount,0,v.DataTable.ActiveComp.RowCount--,1)
+	v.Local.sCmpCode.Set(v.DataTable.ActiveComp(v.Local.iCount).COCODE!fieldvaltrim)
+	'grab data for this company by calling the sub
+	f.Intrinsic.Control.CallSub(XPINF2802,"CompCode",v.Local.sCmpCode,"ShortDt",v.Local.sSDate,"LongDt",v.Local.sLDate)
+f.Intrinsic.Control.Next(v.Local.iCount)
+
+
+'store all of the collected data in the global variable to the Export file in the export path
+f.Intrinsic.file.String2File(v.Local.sINF28FName,v.Global.sINF28)
+
+
+'build back up file in back path
+f.Intrinsic.string.Build("{0}\OAKS\28_Backup\INFARI28A{1}{2}.dat",v.Caller.GlobalDir,"DRC01OPI",v.Local.sSYDate,v.Local.sINF28FName)
+'export the collected data in global variable to the specified back up path
+f.Intrinsic.file.String2File(v.Local.sINF28FName,v.Global.sINF28)
+
+f.Intrinsic.String.Replace(v.Global.dDate.String,"/","_",v.Local.sDate)
+'create Status files
+f.Intrinsic.String.Build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Global.s28OutPath)
+
+f.Intrinsic.String.Build("INF 28 Export completed successfully.{0}",v.Global.s28Out,v.Global.s28Out)
+
+f.Intrinsic.file.String2File(v.Global.s28OutPath,v.Global.s28Out)
+
+
+f.Intrinsic.Control.catch
+f.Intrinsic.Control.CallSub(catching,"sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+
+Program.Sub.ExportFiles.End
+
+Program.Sub.XPINF2802.Start
+v.Local.sDSN.Declare(String)
+v.Local.sOut.Declare(String)
+v.Local.sSQL.Declare(String)
+v.Local.sInvoice.Declare(String)
+v.Local.sFilter.Declare(String)
+v.Local.iCount.Declare(long)
+f.Intrinsic.Control.Try
+f.Intrinsic.String.Build("{0}{1}{2} - ",v.Global.s28Out,v.ambient.NewLine,v.Args.CompCode,v.Global.s28Out)
+f.Intrinsic.String.Build("GLOBAL_{0}",v.Args.CompCode,v.Local.sDSN)
+f.ODBC.Connection!contemp.openConnection(v.Local.sDSN,v.Ambient.PPass,v.Ambient.PUser)
+'fetch header data
+f.Intrinsic.string.Build("select invoice as ID, RTRIM('000') as ROW_ID,RTRIM('DRC01') as GROUP_BU,concat(RIGHT( '                             ' +  (cast(amt_invoice as varchar(27))),27),'0') as CONTROL_AMT,Rtrim('000001') AS CONTROL_CNT,Rtrim('000001') AS GROUP_SEQ_NUM,RTRIM('{1}') as Rec_date,RTRIM('{1}') as EnT_date,RTRIM('{1}') as Acct_date,RTRIM('OPI{0}-') as PT1,RTRIM(' ') as SEQ from V_AR_OPEN_ITEMS a left outer join V_CUSTOMER_INTL b on a.customer = b.customer where batch_code = '10' and date_invoice = '{1}' and b.address4 <> '' and isNumeric(Invoice) = 0 and amt_invoice <> 0 order by invoice ",v.Args.ShortDt.trim,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF28HD","ConTemp",v.Local.sSQL)
+f.Data.DataTable.SetSeries("INF28Hd","SEQ",v.Global.iSEQ28,1)
+'fetch line data
+f.Data.DataTable.AddExpressionColumn("INF28Hd","Group_ID","String","IIF(Len(SEQ) = 1,PT1 + '0000' + seq ,IIF(Len(SEQ) = 2,PT1 + '000' + seq ,IIF(Len(SEQ) = 3,PT1 + '00' + seq ,IIF(Len(SEQ) = 4,PT1 + '0' + seq ,PT1 + SEQ ))))")
+f.Intrinsic.string.Build("select invoice as ID,a.CUSTOMER, RTRIM('001') as ROW_ID,RTRIM('DRC01') as GROUP_BU,RTRIM('DRC01') as BUSINESS_UNIT,left(concat(b.address4,'               '),15) as CUST_ID,left(Concat(CONCAT('OPI{2}',INVOICE),'                              '),30) as ITEM,Rtrim('000001') AS ITEM_LINE,Rtrim('000001') AS GROUP_SEQ_NUM,Ltrim('ISTV ') AS ENTRY_TYPE,Ltrim('OPIGS') AS ENTRY_REASON,concat(RIGHT( '              ' +  (cast(amt_invoice as varchar(12))),12),'0000000000000000') as ENTRY_AMT,RTRIM('{1}') as ACCOUNTING_DT,RTRIM('{1}') as ASOF_DT,LTRIM('OBM     ') as COLLECTOR,LTRIM('NET30') as PYMNT_TERMS_CD,RTRIM('{1}') as USER_DT1,RTRIM('{1}') as USER_DT2,RIGHT(RTRIM(a.customer),3) as ADDRESS_SEQ_NUM,RTRIM('OPI{0}-') as PT1,RTRIM(' ') as SEQ from V_AR_OPEN_ITEMS A left outer join V_CUSTOMER_INTL b on a.customer = b.customer where batch_code = '10' and date_invoice = '{1}' and b.address4 <> '' and isNumeric(Invoice) = 0 and amt_invoice <> 0 order by invoice",v.Args.ShortDt.trim,v.Args.LongDt.trim,v.Args.CompCode,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF28Itm","ConTemp",v.Local.sSQL)
+'f.Data.Dictionary.CreateFromSQL("CustAdd4","contemp","Select customer,concat(LEFT(Address4,15),'@*!*@') from V_CUSTOMER_INTL WHERE REC = 4")
+'f.Data.Dictionary.SetDefaultReturn("CustAdd4","               @*!*@")
+'f.Data.DataTable.FillFromDictionary("INF28Itm","CustAdd4","customer","CUST_ID")
+
+'f.Data.Dictionary.Close("CustAdd4")
+
+f.Data.DataTable.SetSeries("INF28Itm","SEQ",v.Global.iSEQ28,1)
+f.Data.DataTable.AddExpressionColumn("INF28Itm","Group_ID","String","IIF(Len(SEQ) = 1,PT1 + '0000' + seq ,IIF(Len(SEQ) = 2,PT1 + '000' + seq ,IIF(Len(SEQ) = 3,PT1 + '00' + seq ,IIF(Len(SEQ) = 4,PT1 + '0' + seq ,PT1 + SEQ ))))")
+
+'loop through header data and fetch associated line data
+f.Intrinsic.Control.For(v.Local.iCount,0,v.DataTable.INF28HD.RowCount--,1)
+	v.Local.sInvoice.Set(v.DataTable.INF28HD(v.Local.iCount).ID!fieldval)
+	F.Intrinsic.Control.If(v.local.iCount,=,v.DataTable.INF28HD.RowCount--)
+		f.Intrinsic.Math.Add(v.DataTable.INF28HD(v.Local.iCount).seq!fieldValFloat,1,v.Global.iSEQ28)
+	F.Intrinsic.Control.EndIf
+	f.Intrinsic.String.Build("ID = '{0}'",v.Local.sInvoice,v.Local.sFilter)
+	f.Data.DataView.Create("INF28Hd","28HDVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToString("INF28Hd","28HDVW","ROW_ID*!*GROUP_BU*!*GROUP_ID*!*CONTROL_AMT*!*CONTROL_CNT*!*GROUP_SEQ_NUM*!*Rec_date*!*EnT_date*!*Acct_date","","",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}  {2}",v.Global.sINF28,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF28)	
+	f.Data.DataView.Create("INF28Itm","28ItmVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToString("INF28Itm","28ItmVW","ROW_ID*!*GROUP_BU*!*GROUP_ID*!*BUSINESS_UNIT*!*CUST_ID*!*ITEM*!*ITEM_LINE*!*GROUP_SEQ_NUM*!*ENTRY_TYPE*!*ENTRY_REASON*!*ENTRY_AMT*!*ACCOUNTING_DT*!*ASOF_DT*!*COLLECTOR*!*PYMNT_TERMS_CD*!*USER_DT1*!*USER_DT2*!*ADDRESS_SEQ_NUM","","",V.Local.sOut)
+'	F.Intrinsic.String.Replace(V.Local.sOut,"@*!*@","",V.Local.sOut)
+	'store data in associated files
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF28,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF28)	
+	F.Data.DataView.Close("INF28Hd","28HDVW")
+	F.Data.DataView.Close("INF28Itm","28ItmVW")
+f.Intrinsic.Control.Next(v.Local.iCount)
+
+f.Data.DataTable.close("INF28Itm")
+f.Data.DataTable.close("INF28Hd")
+'store Success message
+f.Intrinsic.String.Build("{0}OK",v.Global.s28Out,v.Global.s28Out)
+
+
+f.ODBC.Connection!contemp.close
+f.Intrinsic.Control.catch
+f.Intrinsic.Control.CallSub(catching,"sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+
+Program.Sub.XPINF2802.End
+
+Program.Sub.cmdGenExp_Click.Start
+gui.FDateSel..Visible(True)
+gui.FDateSel..Enabled(False)
+f.Intrinsic.ui.InvokeWaitDialog("Export is running.")
+v.Global.dDate.Set(v.Screen.FDateSel!dtp1.Value)
+f.Intrinsic.Control.CallSub(ExportFiles)
+f.Intrinsic.UI.Msgbox("Export Completed.")
+f.Intrinsic.Control.CallSub(UnloadAll)
+f.Intrinsic.ui.CloseWaitDialog
+
+f.Intrinsic.Control.CallSub(UnloadAll)
+Program.Sub.cmdGenExp_Click.End
+
+Program.Sub.catching.Start
+v.Local.sError.declare(string)
+v.Local.sDate.Declare(String)
+f.Intrinsic.String.Build("{1}Error",v.Global.s28Out,v.Global.s28Out)
+f.Intrinsic.String.Replace(v.Global.dDate.String,"/","_",v.Local.sDate)
+
+f.Intrinsic.String.Build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Global.s28OutPath)
+
+Function.Intrinsic.String.Concat(v.Ambient.Now,": Project: GCG_4926_OAKSExport.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",v.Args.sub,V.Ambient.NewLine,"Error Occurred ",V.Args.errorno," with description ",V.args.errordesc,V.Local.sError)
+f.Intrinsic.String.Build("Error in INF28 Export.{0}{1}{2}",v.Global.s28Out,v.Ambient.NewLine,v.local.sError,v.Global.s28Out)
+
+f.Intrinsic.file.String2File(v.Global.s28OutPath,v.Global.s28Out)
+
+'f.Intrinsic.UI.Msgbox(v.Local.sError)
+f.Intrinsic.Control.CallSub(UnLoadAll)
+Program.Sub.catching.End
+
+Program.Sub.SelStatus28.Start
+V.Local.sError28.Declare(String)
+V.Local.sSuccess28.Declare(String)
+V.Local.bError.Declare(Boolean)
+V.Local.bSuccess.Declare(Boolean)
+V.Local.sDate.Declare(String)
+v.Local.sDisp.Declare(String)
+v.Local.sDispLab.Declare(String)
+
+
+v.local.sDate.set(v.Args.PassDate)
+
+'select the status and load associated status file in the text box
+f.Intrinsic.String.build("Status for date {0}",v.local.sDate,v.Local.sDispLab)
+gui.FStatusCheck.lblStatusHD28.Caption(v.Local.sDispLab)
+
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sError28)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s28OutPath,v.Local.sDate,v.Local.sSuccess28)
+f.Intrinsic.File.Exists(v.Local.sError28,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess28,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	f.Intrinsic.File.File2String(v.Local.sError28,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp28.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD28.ForeColor("255")
+	gui.FStatusCheck.txtErrorDisp28.ForeColor("255")
+	
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	f.Intrinsic.File.File2String(v.Local.sSuccess28,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp28.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD28.ForeColor("32768")
+	gui.FStatusCheck.txtErrorDisp28.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.txtErrorDisp28.Text("No Status File available for display for the current date.")
+f.Intrinsic.Control.EndIf
+gui.FStatusCheck..SetFocus
+
+Program.Sub.SelStatus28.End
+
+Program.Sub.SelStatus02.Start
+V.Local.sError02.Declare(String)
+V.Local.sSuccess02.Declare(String)
+V.Local.bError.Declare(Boolean)
+V.Local.bSuccess.Declare(Boolean)
+V.Local.sDate.Declare(String)
+v.Local.sDisp.Declare(String)
+v.Local.sDispLab.Declare(String)
+
+v.local.sDate.set(v.Args.PassDate)
+'select the status and load associated status file in the text box
+f.Intrinsic.String.build("Status for date {0}",v.local.sDate,v.Local.sDispLab)
+gui.FStatusCheck.lblStatusHD02.Caption(v.Local.sDispLab)
+
+
+f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+
+f.Intrinsic.Control.If(v.Local.bError,=,True)
+	f.Intrinsic.File.File2String(v.Local.sError02,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp02.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD02.ForeColor("255")
+	gui.FStatusCheck.txtErrorDisp02.ForeColor("255")
+	
+f.Intrinsic.Control.ElseIf(v.Local.bSuccess,=,True)
+	f.Intrinsic.File.File2String(v.Local.sSuccess02,v.Local.sDisp)
+	gui.FStatusCheck.txtErrorDisp02.Text(v.Local.sDisp)
+	gui.FStatusCheck.lblStatusHD02.ForeColor("32768")
+	gui.FStatusCheck.txtErrorDisp02.ForeColor("32768")
+f.Intrinsic.Control.Else
+	gui.FStatusCheck.txtErrorDisp02.Text("No Status File available for display for the current date.")
+f.Intrinsic.Control.EndIf
+gui.FStatusCheck..SetFocus
+Program.Sub.SelStatus02.End
+
+Program.Sub.lbl28day1_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day1.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day1_DblClick.End
+
+Program.Sub.lbl28day2_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day2.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day2_DblClick.End
+
+Program.Sub.lbl28day3_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day3.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day3_DblClick.End
+
+Program.Sub.lbl28day4_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day4.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day4_DblClick.End
+
+Program.Sub.lbl28day5_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day5.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day5_DblClick.End
+
+Program.Sub.lbl28day6_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day6.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day6_DblClick.End
+
+Program.Sub.lbl28day7_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl28day7.Caption)
+f.Intrinsic.Control.CallSub(SelStatus28,"PassDate",v.Local.sHold)
+Program.Sub.lbl28day7_DblClick.End
+
+Program.Sub.lbl02day1_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day1.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day1_DblClick.End
+
+Program.Sub.lbl02day2_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day2.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day2_DblClick.End
+
+Program.Sub.lbl02day3_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day3.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day3_DblClick.End
+
+Program.Sub.lbl02day4_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day4.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day4_DblClick.End
+
+Program.Sub.lbl02day5_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day5.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day5_DblClick.End
+
+Program.Sub.lbl02day6_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day6.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day6_DblClick.End
+
+Program.Sub.lbl02day7_DblClick.Start
+v.Local.sHold.Declare(String)
+v.Local.sHold.Set(v.Screen.FStatusCheck!lbl02day7.Caption)
+f.Intrinsic.Control.CallSub(SelStatus02,"PassDate",v.Local.sHold)
+Program.Sub.lbl02day7_DblClick.End
