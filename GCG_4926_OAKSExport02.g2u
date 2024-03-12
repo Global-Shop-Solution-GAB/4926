@@ -1,0 +1,611 @@
+Program.Sub.ScreenSU.Start
+Gui.FOaksMaint..Create
+Gui.FOaksMaint..Caption("OAKS 02 Nightly Export Maintenance")
+Gui.FOaksMaint..Size(9240,12810)
+Gui.FOaksMaint..MinX(0)
+Gui.FOaksMaint..MinY(0)
+Gui.FOaksMaint..Position(0,0)
+Gui.FOaksMaint..BackColor(-2147483633)
+Gui.FOaksMaint..MousePointer(0)
+Gui.FOaksMaint..Event(UnLoad,FOaksMaint_UnLoad)
+Gui.FOaksMaint.GsGCCompSel.Create(GsGridControl)
+Gui.FOaksMaint.GsGCCompSel.Size(8940,10275)
+Gui.FOaksMaint.GsGCCompSel.Position(15,1350)
+Gui.FOaksMaint.GsGCCompSel.Event(CellValueChanged,GsGCCompSel_CellValueChanged)
+Gui.FOaksMaint.txtXPLoc.Create(TextBox,"",True,5190,300,0,1245,180,True,0,"Arial",8,-2147483643,1)
+Gui.FOaksMaint.lbl1.Create(Label,"Export Folder:",True,1200,255,0,15,270,True,0,"Arial",8,-2147483633,0)
+Gui.FOaksMaint.lbl2.Create(Label,"Active company codes for export",True,5070,255,0,60,1080,True,0,"Arial",8,-2147483633,0)
+Gui.FOaksMaint.lbl2.FontStyle(True,False,False,False,False)
+Gui.FOaksMaint.cmdFoldSel.Create(Button)
+Gui.FOaksMaint.cmdFoldSel.Size(375,345)
+Gui.FOaksMaint.cmdFoldSel.Position(6540,150)
+Gui.FOaksMaint.cmdFoldSel.Event(Click,cmdFoldSel_Click)
+Gui.FOaksMaint.cmdFoldSel.Caption("^")
+Gui.FOaksMaint.cmdSaveXpPath.Create(Button)
+Gui.FOaksMaint.cmdSaveXpPath.Size(1950,375)
+Gui.FOaksMaint.cmdSaveXpPath.Position(7005,150)
+Gui.FOaksMaint.cmdSaveXpPath.Caption("Save Export Path")
+Gui.FOaksMaint.cmdSaveXpPath.Event(Click,cmdSaveXpPath_Click)
+Gui.FOaksMaint.cmdSaveActComp.Create(Button)
+Gui.FOaksMaint.cmdSaveActComp.Size(1965,375)
+Gui.FOaksMaint.cmdSaveActComp.Position(15,11745)
+Gui.FOaksMaint.cmdSaveActComp.Caption("Save Active Companies")
+Gui.FOaksMaint.cmdSaveActComp.Event(Click,cmdSaveActComp_Click)
+Gui.FOaksMaint.lbl3.Create(Label,"User ID",True,1200,255,0,0,720,True,0,"Arial",8,-2147483633,0)
+Gui.FOaksMaint.txtUserID.Create(TextBox,"",True,1320,300,0,1245,630,True,0,"Arial",8,-2147483643,1)
+Gui.FOaksMaint.txtUserID.Locked(True)
+Gui.FOaksMaint.cmdUserSel.Create(Button)
+Gui.FOaksMaint.cmdUserSel.Size(375,345)
+Gui.FOaksMaint.cmdUserSel.Position(5580,600)
+Gui.FOaksMaint.cmdUserSel.Caption("^")
+Gui.FOaksMaint.cmdUserSel.Event(Click,cmdUserSel_Click)
+Gui.FOaksMaint.cmdSaveUser.Create(Button)
+Gui.FOaksMaint.cmdSaveUser.Size(1950,375)
+Gui.FOaksMaint.cmdSaveUser.Position(7005,600)
+Gui.FOaksMaint.cmdSaveUser.Caption("Save User ID")
+Gui.FOaksMaint.cmdSaveUser.Event(Click,cmdSaveUser_Click)
+Gui.FOaksMaint.txtOaksID.Create(TextBox,"",True,1770,300,0,3705,630,True,0,"Arial",8,-2147483643,1)
+Gui.FOaksMaint.txtOaksID.Locked(True)
+Gui.FOaksMaint.lbl4.Create(Label,"Oaks ID",True,975,255,0,2700,720,True,0,"Arial",8,-2147483633,0)
+Gui.FDateSel..Create
+Gui.FDateSel..Caption("Date Selection for Export")
+Gui.FDateSel..Size(4395,1455)
+Gui.FDateSel..MinX(0)
+Gui.FDateSel..MinY(0)
+Gui.FDateSel..Position(0,0)
+Gui.FDateSel..BackColor(-2147483633)
+Gui.FDateSel..MousePointer(0)
+Gui.FDateSel..Sizeable(False)
+Gui.FDateSel..Event(UnLoad,UnloadAll)
+Gui.FDateSel.lbl1.Create(Label,"Select Date Invoiced",True,1590,255,0,90,180,True,0,"Arial",8,-2147483633,0)
+Gui.FDateSel.dtp1.Create(DatePicker)
+Gui.FDateSel.dtp1.Size(1935,285)
+Gui.FDateSel.dtp1.Position(2205,90)
+Gui.FDateSel.cmdGenExp.Create(Button)
+Gui.FDateSel.cmdGenExp.Size(1515,375)
+Gui.FDateSel.cmdGenExp.Position(90,495)
+Gui.FDateSel.cmdGenExp.Caption("Generate Export")
+Gui.FDateSel.cmdGenExp.Event(Click,cmdGenExp_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.sXPPath.Declare(String)
+v.Global.sUID.Declare
+v.Global.sOaksID.Declare
+v.Global.bSaveMsg.Declare(Boolean)
+v.Global.dDate.Declare(Date)
+v.Global.dDate.Set(v.Ambient.Date)
+v.Global.sINF28.Declare(string)
+v.Global.sINF02.Declare(string)
+v.Global.iSEQ28.declare(long,0)
+v.Global.iSEQ02.declare(long,0)
+v.Global.s02Out.Declare(string)
+v.Global.s02OutPath.Declare(string)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+v.Local.sFilePath.Declare(String)
+v.Local.bExists.Declare(boolean)
+V.Local.sDate.Declare(String)
+V.Local.sError28.Declare(String)
+V.Local.sError02.Declare(String)
+V.Local.sSuccess28.Declare(String)
+V.Local.sSuccess02.Declare(String)
+
+
+V.Local.bError.Declare(Boolean)
+
+V.Local.bSuccess.Declare(Boolean)
+'created seperate script for 02 Export. This is similar to GCG_4926_OAKSEXPORT
+'this cannot be used for maintenance and status screens even though you may see code associated with one or both of them
+
+
+f.Intrinsic.string.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.string.Build("{0}\OAKS\02_Status",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+v.Global.s02OutPath.Set(v.Local.sFilePath)
+
+
+f.Intrinsic.string.Build("{0}\OAKS\02_Backup",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.DirExists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.local.bExists,=,false)
+	f.Intrinsic.File.CreateDir(v.Local.sFilePath)
+f.Intrinsic.Control.EndIf
+
+
+f.odbc.Connection!conx.OpenConnection(v.Ambient.PDSN,v.Ambient.PUser,v.Ambient.PPass)
+Function.ODBC.Connection!conxc.OpenCommonConnection
+f.Intrinsic.Control.If(v.Caller.Switches,=,"M")
+	f.Intrinsic.Control.CallSub(LoadMaint)
+f.Intrinsic.Control.ElseIf(v.Caller.Switches,=,"O")
+	f.Intrinsic.Control.CallSub(GetUserID,"ConName","XP")
+	gui.FDateSel..Show
+f.Intrinsic.Control.Else
+
+	f.Intrinsic.Control.CallSub(GetUserID,"ConName","XP")
+	v.local.sDate.set(v.Global.dDate.String)
+	
+	f.Intrinsic.String.Replace(v.Local.sDate,"/","_",v.Local.sDate)
+	f.Intrinsic.String.build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sError02)
+	f.Intrinsic.String.build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Local.sSuccess02)
+	
+		
+		f.Intrinsic.File.Exists(v.Local.sError02,v.Local.bError)
+		f.Intrinsic.File.Exists(v.Local.sSuccess02,v.Local.bSuccess)
+		f.Intrinsic.Control.If(v.Local.bError,=,True)
+			f.Intrinsic.File.DeleteFile(v.Local.sError02)
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.If(v.Local.bSuccess,=,True)
+			f.Intrinsic.File.DeleteFile(v.Local.sSuccess02)
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.Control.CallSub(ExportFiles)
+		f.Intrinsic.Control.CallSub(UnloadAll)
+	f.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.UnloadAll.Start
+f.ODBC.Connection!conx.Close
+f.ODBC.Connection!conxc.Close
+f.Intrinsic.Control.End
+
+Program.Sub.UnloadAll.End
+
+Program.Sub.cmdFoldSel_Click.Start
+v.local.sFolder.Declare(string)
+v.Local.sXPPath.Declare(String)
+v.Local.sXPPath.Set(v.Screen.FOaksMaint!txtXPLoc.text.trim)
+f.Intrinsic.UI.FolderBrowser("Select a Destination Folder",v.Local.sFolder)
+f.Intrinsic.Control.If(v.Local.sFolder,<>,"***CANCEL***")
+	gui.FOaksMaint.txtXPLoc.Text(v.Local.sFolder)
+f.Intrinsic.Control.Else		
+	gui.FOaksMaint.txtXPLoc.Text(v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+Program.Sub.cmdFoldSel_Click.End
+
+Program.Sub.cmdUserSel_Click.Start
+v.Local.sSql.Declare
+v.local.sTitles.Declare
+v.Local.iWidths.Declare
+v.Local.sRet.Declare
+v.Local.sDisp.Declare
+
+'create browser
+v.Local.sSql.Set("select a.GS_USER, a.first_name,a.Last_name,b.window_user from user_information  a inner join USER_SECURITY b on a.user_id = b.user_id where RTRIM(b.window_user) <> ''")
+F.Intrinsic.String.Split("User ID*!*First Name*!*Last Name*!*Oaks ID","*!*",V.Local.sTitles)
+F.Intrinsic.String.Split("300*!*300*!*300*!*300","*!*",V.Local.iWidths)
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+f.Intrinsic.UI.Browser("Select User ID ","Conxc",V.Local.sSql,V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+
+'handle return
+F.Intrinsic.Control.If(V.Local.sRet,=,v.Ambient.Cancel)
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.else
+	f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.local.sRet)
+	gui.FOaksMaint.txtUserID.Text(v.Local.sRet(0))	
+	f.Intrinsic.Control.If(v.Local.sRet.UBound,>,2)
+		gui.FOaksMaint.txtOaksID.Text(v.Local.sRet(3))
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+
+Program.Sub.cmdUserSel_Click.End
+
+Program.Sub.LoadMaint.Start
+f.Intrinsic.Control.CallSub(RefreshCompanyList)
+f.Intrinsic.Control.CallSub(GetXPPath,"ConName","Maint")
+f.Intrinsic.Control.CallSub(GetUserID,"ConName","Maint")
+f.Data.DataTable.CreateFromSQL("ActiveCompDT","conx","Select EXP_ENABLED,COCODE,COMPANYNAME from GCG_4926_CompMain1 order by EXP_ENABLED Desc, COCODE ",true)
+f.Data.DataView.Create("ActiveCompDT","ActiveCompVw",22)
+gui.FOaksMaint.GsGCCompSel.AddGridviewFromDataview("ActiveCompGRID","ActiveCompDT","ActiveCompVw")
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "ReadOnly", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "AllowEdit", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "caption", "Export Enabled")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "EXP_ENABLED", "MinWidth",120)
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "ReadOnly", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "AllowEdit", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "caption", "Company Code")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COCODE", "MinWidth",120)
+
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "headerforecolor", v.Color.PRI-GSS-00)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "headerfontbold", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "ReadOnly", True)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "AllowEdit", False)
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "caption", "Company Name")
+Gui.FOaksMaint.GsGCCompSel.SetColumnProperty("ActiveCompGRID", "COMPANYNAME", "MinWidth",360)
+
+
+gui.FOaksMaint.GsGCCompSel.MainView("ActiveCompGRID")
+gui.FOaksMaint..SetFocus
+gui.FOaksMaint..Show
+Program.Sub.LoadMaint.End
+
+Program.Sub.GetXPPath.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH1.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.Exists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.Local.bExists,=,true)
+	f.Intrinsic.file.File2String(v.Local.sFilePath,v.Local.sXPPath)
+f.Intrinsic.Control.Else
+	f.Intrinsic.string.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.If(v.Args.ConName,=,"Maint")
+	gui.FOaksMaint.txtXPLoc.text(v.Local.sXPPath)
+f.Intrinsic.Control.Elseif(v.Args.ConName,=,"XP")
+	v.Global.sXPPath.Set(v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.ExitSub
+
+
+Program.Sub.GetXPPath.End
+
+Program.Sub.GetUserID.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sSQL.Declare(String)
+v.Local.sUID.Declare(String)
+v.Local.sOaksID.Declare(String)
+v.Local.bExists.Declare(boolean)
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_02UID.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.File.Exists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(v.Local.bExists,=,true)
+	f.Intrinsic.file.File2String(v.Local.sFilePath,v.Local.sUID)
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.String.build("Select a.window_user from USER_SECURITY a inner join user_information b on a.user_id = b.user_id where b.GS_User = '{0}'",v.Local.sUID,v.Local.sSQL)
+f.ODBC.Connection!conxc.executeandreturn(v.Local.sSQL,v.Local.sOaksID)
+
+
+f.Intrinsic.Control.If(v.Args.ConName,=,"Maint")
+	gui.FOaksMaint.txtUserID.text(v.Local.sUID)
+	gui.FOaksMaint.txtOaksID.text(v.Local.sOaksID)
+f.Intrinsic.Control.Elseif(v.Args.ConName,=,"XP")
+	v.Global.sUID.Set(v.Local.sUID)
+	v.Global.sOaksID.Set(v.Local.sOaksID)
+f.Intrinsic.Control.EndIf
+
+Program.Sub.GetUserID.End
+
+Program.Sub.RefreshCompanyList.Start
+v.Local.sCompListAct.declare(String)
+v.Local.sCompListMaint.Declare(string)
+v.Local.sSql.declare(String)
+
+f.odbc.Connection!conxc.ExecuteAndReturn("Select distinct COCODE from COMPANIES",v.Local.sCompListAct)
+
+f.Intrinsic.String.Replace(v.Local.sCompListAct,"#$#","','",v.Local.sCompListAct)
+f.Intrinsic.String.Build("'{0}'",v.Local.sCompListAct,v.Local.sCompListAct)
+
+f.odbc.Connection!conx.ExecuteAndReturn("Select distinct COCODE from GCG_4926_CompMain1",v.Local.sCompListMaint)
+f.Intrinsic.String.Replace(v.Local.sCompListMaint,"#$#","','",v.Local.sCompListMaint)
+f.Intrinsic.String.Build("'{0}'",v.Local.sCompListMaint,v.Local.sCompListMaint)
+
+
+f.Intrinsic.string.Build("Select COCODE,COMPANYNAME,cast(0 as bit) as EXP_ENABLED from COMPANIES where COCODE not in ({0})",v.Local.sCompListMaint,v.Local.sSql)
+f.Data.DataTable.CreateFromSQL("AddCompDT","conxc",v.Local.sSql)
+
+f.Intrinsic.Control.If(v.DataTable.AddCompDT.RowCount,>,0)
+	f.Data.DataTable.SaveToDB("AddCompDT","conx","GCG_4926_CompMain1","COCODE",256,"")
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.string.Build("Delete from GCG_4926_CompMain1 where COCODE not in ({0})",v.Local.sCompListAct,v.Local.sSql)
+f.ODBC.Connection!conx.execute(v.Local.sSql)
+f.Intrinsic.Control.ExitSub
+
+
+Program.Sub.RefreshCompanyList.End
+
+Program.Sub.cmdSaveXpPath_Click.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+gui.FOaksMaint..Enabled(false)
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH1.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+v.Local.sXPPath.Set(v.Screen.FOaksMaint!txtXPLoc.text)
+f.Intrinsic.file.DirExists(v.Local.sXPPath,v.Local.bExists)
+f.Intrinsic.Control.If(v.Local.bExists,=,false)
+	f.Intrinsic.UI.Msgbox("The path specified does not exist! Please enter a valid Fully Qualified path.")
+f.Intrinsic.Control.Else
+	f.Intrinsic.File.String2File(v.Local.sFilePath,v.Local.sXPPath)
+	f.Intrinsic.UI.Msgbox("Export Path has been Saved!")
+f.Intrinsic.Control.EndIf
+gui.FOaksMaint..Enabled(True)
+gui.FOaksMaint..SetFocus
+f.Intrinsic.Control.ExitSub
+
+Program.Sub.cmdSaveXpPath_Click.End
+
+Program.Sub.cmdSaveUser_Click.Start
+v.Local.sFilePath.Declare(String)
+v.Local.sUID.Declare(String)
+v.Local.bExists.Declare(boolean)
+gui.FOaksMaint..Enabled(false)
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_02UID.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+v.Local.sUID.Set(v.Screen.FOaksMaint!txtUserID.text)
+f.Intrinsic.Control.If(v.Local.sUID.Trim,<>,"")
+	f.Intrinsic.File.String2File(v.Local.sFilePath,v.Local.sUID)
+	f.Intrinsic.UI.Msgbox("User ID has been Saved!")
+f.Intrinsic.Control.Else
+	f.Intrinsic.UI.Msgbox("You need to select a User ID!")
+f.Intrinsic.Control.EndIf
+gui.FOaksMaint..Enabled(True)
+gui.FOaksMaint..SetFocus
+f.Intrinsic.Control.ExitSub
+Program.Sub.cmdSaveUser_Click.End
+
+Program.Sub.cmdSaveActComp_Click.Start
+gui.FOaksMaint..Enabled(False)
+f.Intrinsic.Control.If(v.Global.bSaveMsg,=,true)
+	Function.Data.DataTable.SaveToDB("ActiveCompDT","conx","GCG_4926_CompMain1","COCODE",256)
+	f.Intrinsic.UI.Msgbox("Active companies have been saved!")
+	v.Global.bSaveMsg.Set(False)
+f.Intrinsic.Control.Else
+	f.Intrinsic.UI.Msgbox("No changes have been made to be saved!")
+f.Intrinsic.Control.EndIf
+gui.FOaksMaint..Enabled(True)
+f.intrinsic.Control.ExitSub
+
+Program.Sub.cmdSaveActComp_Click.End
+
+Program.Sub.GsGCCompSel_CellValueChanged.Start
+v.Global.bSaveMsg.Set(true)
+Program.Sub.GsGCCompSel_CellValueChanged.End
+
+Program.Sub.FOaksMaint_UnLoad.Start
+V.Local.sRet.Declare(String)
+f.Intrinsic.Control.If(v.Global.bSaveMsg,=,true)
+	F.Intrinsic.UI.Msgbox("Changes were made in the Active Company Grid. Do you wish to save these changes before exiting?","Save Data?",3,V.Local.sRet)
+	f.Intrinsic.Control.If(v.Local.sRet,=,2)
+			f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.ElseIf(v.Local.sRet,=,6)
+		f.Intrinsic.Control.CallSub(cmdSaveActComp_Click)	
+	f.Intrinsic.Control.Else
+		v.Global.bSaveMsg.Set(false)			
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.CallSub(UnloadAll)
+
+Program.Sub.FOaksMaint_UnLoad.End
+
+Program.Sub.ExportFiles.Start
+v.Local.sINF28FName.Declare(String)
+v.Local.sINF02FName.Declare(String)
+v.Local.sSQL.Declare(string)
+V.Local.iCount.Declare(long)
+v.Local.sCmpCode.Declare(String)
+v.Local.sDate.Declare(String)
+v.Local.sSDate.Declare(String)
+v.Local.sSYDate.Declare(String)
+v.Local.sLDate.Declare(String)
+v.Local.sFilePath.Declare(String)
+v.Local.sXPPath.Declare(String)
+v.Local.bExists.Declare(boolean)
+f.Intrinsic.Control.Try
+f.Intrinsic.string.Build("{0}\OAKS\GCG_4787_XPPATH1.dat",v.Caller.GlobalDir,v.Local.sFilePath)
+f.Intrinsic.file.Exists(v.Local.sFilePath,v.Local.bExists)
+f.Intrinsic.Control.If(V.Local.bExists,=,false)
+	f.Intrinsic.String.Build("{0}\OAKS",v.Caller.GlobalDir,v.Local.sXPPath)
+	f.Intrinsic.File.String2File(v.Local.sFilePath,v.Local.sXPPath)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.File.File2String(v.Local.sFilePath,v.Local.sXPPath)
+
+f.Intrinsic.string.Format(v.Global.dDate,"mmddyy",v.Local.sSDate)
+f.Intrinsic.string.Format(v.Global.dDate,"mmddyyyy",v.Local.sSYDate)
+
+v.Local.sLDate.Set(v.Global.dDate.PervasiveDate)
+
+'v.Local.sLDate.Set("2016-09-14")
+
+f.Intrinsic.string.Build("{0}\INFARI28A{1}.dat",v.Local.sXPPath,v.Local.sSYDate,v.Local.sINF28FName)
+'f.Intrinsic.string.Build("{0}\INFAPI02A{1}.dat",v.Local.sXPPath,v.Local.sSYDate,v.Local.sINF02FName)
+f.Intrinsic.string.Build("{0}\INFAPI02A{1}.dat",v.Local.sXPPath,"DRC01OPI",v.Local.sINF02FName)
+
+
+
+f.Data.DataTable.CreateFromSQL("ActiveComp","conx","Select COCODE from GCG_4926_CompMain1 where EXP_ENABLED = 1")
+
+f.Intrinsic.Control.For(v.Local.iCount,0,v.DataTable.ActiveComp.RowCount--,1)
+	v.Local.sCmpCode.Set(v.DataTable.ActiveComp(v.Local.iCount).COCODE!fieldvaltrim)
+	f.Intrinsic.Control.CallSub(XPINF2802,"CompCode",v.Local.sCmpCode,"ShortDt",v.Local.sSDate,"LongDt",v.Local.sLDate)
+f.Intrinsic.Control.Next(v.Local.iCount)
+
+f.Intrinsic.file.String2File(v.Local.sINF02FName,v.Global.sINF02)
+
+'build back up file in back path
+f.Intrinsic.string.Build("{0}\OAKS\02_Backup\INFARI02A{1}{2}.dat",v.Caller.GlobalDir,"DRC01OPI",v.Local.sSYDate,v.Local.sINF02FName)
+'export the collected data in global variable to the specified back up path
+f.Intrinsic.file.String2File(v.Local.sINF02FName,v.Global.sINF02)
+
+f.Intrinsic.String.Replace(v.Global.dDate.String,"/","_",v.Local.sDate)
+
+f.Intrinsic.String.Build("{0}\{1}@Success.txt",v.Global.s02OutPath,v.Local.sDate,v.Global.s02OutPath)
+
+f.Intrinsic.String.Build("INF 02 Export completed successfully.{0}",v.Global.s02Out,v.Global.s02Out)
+
+f.Intrinsic.file.String2File(v.Global.s02OutPath,v.Global.s02Out)
+
+
+f.Intrinsic.Control.catch
+f.Intrinsic.Control.CallSub(catching,"sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+
+Program.Sub.ExportFiles.End
+
+Program.Sub.XPINF2802.Start
+v.Local.sDSN.Declare(String)
+v.Local.sOut.Declare(String)
+v.Local.sSQL.Declare(String)
+v.Local.sInvoice.Declare(String)
+v.Local.sFilter.Declare(String)
+v.Local.iCount.Declare(long)
+v.Local.sAttention.Declare(String)
+v.Local.sNameVendor.Declare(String)
+v.Local.SlfDATE.Declare(String)
+F.IntrinsiC.String.Replace(v.Args.LongDt,"-","/",v.Local.SlfDATE)
+
+'Function.Intrinsic.Debug.InvokeDebugger
+
+
+f.Intrinsic.Control.Try
+f.Intrinsic.String.Build("{0}{1}{2} - ",v.Global.s02Out,v.ambient.NewLine,v.Args.CompCode,v.Global.s02Out)
+
+f.Intrinsic.String.Build("GLOBAL_{0}",v.Args.CompCode,v.Local.sDSN)
+f.ODBC.Connection!contemp.openConnection(v.Local.sDSN,v.Ambient.PPass,v.Ambient.PUser)
+v.Local.sAttention.Set(v.Global.sOaksID)
+f.Intrinsic.String.RPad(v.Local.sAttention," ",30,v.Local.sAttention)
+
+v.Local.sNameVendor.Set("")
+f.Intrinsic.String.RPad(v.Local.sNameVendor," ",5,v.Local.sNameVendor)
+
+f.Intrinsic.string.Build("select RTRIM('000') as ROW_ID,RTRIM('DRC01') as BUSINESS_UNIT,concat('{0}',right(rtrim(VOUCHER),5)) as VOUCHER_ID_RELATED,a.INVOICE as Invoice_ID,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),9,2)) as INVOICE_DT,RTRIM('STATE') AS VENDOR_SETID,RTRIM(E.EXTERNAL_ID) as VENDOR_ID,LEFT(CONCAT(F.CODE_SORT,'          '),10) AS VNDR_LOC,CAST( CASE WHEN F.OTHER <> '' THEN rtrim(F.OTHER) ELSE '000' END AS CHAR(3)) AS ADDRESS_SEQ_NUM,RTRIM('648') AS ORIGIN, ltrim('{1}') AS OPRID,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),9,2)) as ACCOUNTING_dt,concat(RIGHT( '                             ' +  (cast(amt_invoice as varchar(27))),27),'0') as GROSS_AMT,LEFT(CONCAT(CAST(D.DISCOUNT_DAYS AS CHAR(5)),'     '),5) AS PYMNT_TERMS_CD, cast('                                                  ' as char(50)) as Fill_1,cast('                                                  ' as char(50)) as Fill_2,cast('                                                  ' as char(50)) as Fill_3,cast( '                                                      ' as char(54)) as Fill_4, CAST( CASE WHEN C.ADDRESS4 <> '' THEN LEFT(CONCAT(C.ADDRESS4,'   '),3) ELSE '000' END AS CHAR(3)) AS REMIT_ADDRESS_SEQ_NUM,LTRIM('P     ') as VCHR_BLD_CODE,cast('                                                                      ' as char(70)) as PYMNT_MESSAGE,RTRIM('RE') as PYMNT_HANDLING_CD,RTRIM('N') as PYMNT_HOLD, CAST('   ' AS CHAR(3)) AS PYMNT_HOLD_REASON,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),9,2)) as USER_VCHR_DATE,CAST('                ' AS CHAR(16)) AS LAST_FILL,LTRIM('REG ') as REG from v_AP_OPEN_ITEMS a right outer join V_AP_INV_TAX_DTL g ON g.invoice = a.invoice AND g.BATCH_NUM = A.BATCH_NUM LEFT OUTER JOIN v_vendor_intl C ON A.VENDOR = C.VENDOR LEFT OUTER JOIN V_VENDOR_PAY_TO D ON A.VENDOR = D.VENDOR LEFT OUTER JOIN V_VENDOR_ADDL E on A.vendor = E.vendor LEFT OUTER JOIN V_VENDOR_MASTER F on A.vendor = F.vendor where a.batch_code = 10 and a.PURCHASE_ORDER <> '' AND A.DATE_INVOICE = '{2}' and g.PAY_WITH_CARD = 0 order by INVOICE_ID",v.Args.CompCode,v.Local.sAttention,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF02VHDPO","ConTemp",v.Local.sSQL)
+
+'f.Data.DataTable.AddExpressionColumn("INF28Hd","Group_ID","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+f.Intrinsic.string.Build("select a.INVOICE as Invoice_ID,RTRIM('001') as ROW_ID,RTRIM('DRC01') as BUSINESS_UNIT,concat('{0}',right(VOUCHER,5)) as VOUCHER_ID_RELATED,ltrim('{1}') AS BUSINESS_UNIT_PO,LEFT(CONCAT(C.USER_1,'          '),10) AS PO_ID,CAST( CASE WHEN D.CODE_ITEM_SORT <> '' THEN RIGHT(CONCAT('00000',LEFT(D.CODE_ITEM_SORT,5)),5) ELSE '00000' END AS CHAR(5)) AS LINE_NBR,RTRIM('001') AS SCHED_NBR,cast('                              ' as char(30)) as DESCR,concat(RIGHT( '                             ' +  (cast(B.COST_INVOICED as varchar(27))),27),'0') as MERCHANDISE_AMT,CAST( CASE WHEN c.USER_2 = 'QTY' THEN 'STATE' ELSE '     ' END AS CHAR(5)) AS ITM_SETID,CAST( CASE WHEN c.USER_2 = 'QTY' THEN RIGHT(CONCAT(D.PART_MFG_NO,'                 '),18) ELSE '                 ' END AS CHAR(18)) AS INV_ITEM_ID,CAST( CASE WHEN c.USER_2 = 'QTY' THEN concat(RIGHT( '                 ' + (cast(amt_invoice as varchar(16))),16),'0')ELSE '         0000.000' END AS CHAR(17)) AS QTY_VOUCHER,CAST( CASE WHEN c.USER_2 = 'QTY' THEN left(G.DESCR,3)ELSE '   ' END AS CHAR(3)) AS UNIT_OF_MEASURE,CAST( CASE WHEN c.USER_2 = 'QTY' THEN concat(RIGHT( '                 ' + (cast(d.cost as varchar(16))),16),'0')ELSE '         0000.000' END AS CHAR(17)) AS UNIT_PRICE,cast('                          ' as char(26)) as FILLER ,RTRIM(' ') as SEQ from v_AP_OPEN_ITEMS a right outer join V_AP_INV_TAX_DTL b ON b.invoice = a.invoice AND B.BATCH_NUM = A.BATCH_NUM LEFT OUTER JOIN V_PO_HEADER c on b.po_no = c.purchase_order LEFT OUTER join V_PO_LINES D ON B.PO_LINE = LEFT(D.RECORD_NO,3) AND B.po_no = D.purchase_order LEFT OUTER JOIN V_VENDOR_ADDL E on b.VENDOR_ID = E.vendor LEFT OUTER JOIN V_VENDOR_MASTER F on b.VENDOR_ID = F.vendor LEFT OUTER JOIN V_UM_CODES G on d.UM_PURCHASING = g.code where a.batch_code = 10 and a.PURCHASE_ORDER <> '' AND A.DATE_INVOICE = '{2}' and b.PAY_WITH_CARD = 0  order by INVOICE_ID",v.Args.CompCode,v.Local.sNameVendor,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF02VLPO","ConTemp",v.Local.sSQL)
+'f.Data.Dictionary.CreateFromSQL("CustAdd4","contemp","Select customer,concat(LEFT(Address4,15),'@*!*@') from V_CUSTOMER_INTL B WHERE REC = 4")
+'f.Data.Dictionary.SetDefaultReturn("CustAdd4","               @*!*@")
+'f.Data.DataTable.FillFromDictionary("INF28Itm","CustAdd4","customer","CUST_ID")
+'f.Data.Dictionary.Close("CustAdd4")
+
+'f.Data.DataTable.SetSeries("INF28Itm","SEQ",v.Global.iSEQ28,1)
+'f.Data.DataTable.AddExpressionColumn("INF28Itm","Group_ID","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+
+
+f.Intrinsic.Control.For(v.Local.iCount,0,v.DataTable.INF02VHDPO.RowCount--,1)
+	v.Local.sInvoice.Set(v.DataTable.INF02VHDPO(v.Local.iCount).INVOICE_ID!fieldval)
+
+	f.Intrinsic.String.Build("INVOICE_ID = '{0}'",v.Local.sInvoice,v.Local.sFilter)
+	f.Data.DataView.Create("INF02VHDPO","02VHDPOVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToString("INF02VHDPO","02VHDPOVW","ROW_ID*!*BUSINESS_UNIT*!*VOUCHER_ID_RELATED*!*Invoice_ID*!*INVOICE_DT*!*VENDOR_SETID*!*VENDOR_ID*!*VNDR_LOC*!*ADDRESS_SEQ_NUM*!*ORIGIN*!*OPRID*!*ACCOUNTING_dt*!*GROSS_AMT*!*PYMNT_TERMS_CD*!*Fill_1*!*Fill_2*!*Fill_3*!*Fill_4*!*REMIT_ADDRESS_SEQ_NUM*!*VCHR_BLD_CODE*!*PYMNT_MESSAGE*!*PYMNT_HANDLING_CD*!*PYMNT_HOLD*!*PYMNT_HOLD_REASON*!*USER_VCHR_DATE*!*LAST_FILL*!*REG","","",V.Local.sOut)
+	F.Intrinsic.String.Replace(V.Local.sOut,"~","/",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF02,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF02)	
+	
+	f.Data.DataView.Create("INF02VLPO","02VLPOVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToDataTable("INF02VLPO","02VLPOVW","TempDT")
+	f.Data.DataTable.SetSeries("TempDT","SEQ",0,1)
+	f.Data.DataTable.AddExpressionColumn("TempDT","VOUCHER_LINE_NUM","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+	f.Data.dataview.Create("TempDT","TempVw",22)
+	f.Data.DataView.ToString("TempDT","TempVw","ROW_ID*!*BUSINESS_UNIT*!*VOUCHER_ID_RELATED*!*VOUCHER_LINE_NUM*!*BUSINESS_UNIT_PO*!*PO_ID*!*LINE_NBR*!*SCHED_NBR*!*DESCR*!*MERCHANDISE_AMT*!*ITM_SETID*!*INV_ITEM_ID*!*QTY_VOUCHER*!*UNIT_OF_MEASURE*!*UNIT_PRICE*!*FILLER","",v.Ambient.NewLine,V.Local.sOut)
+	F.Intrinsic.String.Replace(V.Local.sOut,"~","/",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF02,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF02)	
+
+	
+	F.Data.DataView.Close("INF02VHDPO","02VHDPOVW")
+	F.Data.DataView.Close("INF02VLPO","02VLPOVW")
+	F.Data.DataView.Close("TempDT","TempVw")
+	f.Data.DataTable.Close("TempDT")
+f.Intrinsic.Control.Next(v.Local.iCount)
+
+
+f.Data.DataTable.close("INF02VHDPO")
+f.Data.DataTable.close("INF02VLPO")
+
+f.Intrinsic.string.Build("select RTRIM('000') as ROW_ID,RTRIM('DRC01') as BUSINESS_UNIT,concat('{0}',right(rtrim(VOUCHER),5)) as VOUCHER_ID_RELATED,a.INVOICE as Invoice_ID,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),9,2)) as INVOICE_DT,RTRIM('STATE') AS VENDOR_SETID,RTRIM(E.EXTERNAL_ID) as VENDOR_ID,LEFT(CONCAT(F.CODE_SORT,'          '),10) AS VNDR_LOC,CAST( CASE WHEN F.OTHER <> '' THEN rtrim(F.OTHER) ELSE '000' END AS CHAR(3)) AS ADDRESS_SEQ_NUM,RTRIM('648') AS ORIGIN, ltrim('{1}') AS OPRID,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_INVOICE, sql_char),10),9,2)) as ACCOUNTING_dt,concat(RIGHT( '                             ' +  (cast(amt_invoice as varchar(27))),27),'0') as GROSS_AMT,LEFT(CONCAT(CAST(D.DISCOUNT_DAYS AS CHAR(5)),'     '),5) AS PYMNT_TERMS_CD, cast('                                                  ' as char(50)) as Fill_1,cast('                                                  ' as char(50)) as Fill_2,cast('                                                  ' as char(50)) as Fill_3,cast( '                                                      ' as char(54)) as Fill_4, CAST( CASE WHEN C.ADDRESS4 <> '' THEN LEFT(CONCAT(C.ADDRESS4,'   '),3) ELSE '000' END AS CHAR(3)) AS REMIT_ADDRESS_SEQ_NUM,cast('      ' as char(6)) as VCHR_BLD_CODE,cast('                                                                      ' as char(70)) as PYMNT_MESSAGE,RTRIM('RE') as PYMNT_HANDLING_CD,RTRIM('N') as PYMNT_HOLD, CAST('   ' AS CHAR(3)) AS PYMNT_HOLD_REASON,Concat(CONCAT(CONCAT(CONCAT(Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),1,4),'~'),Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),6,2)),'~'),Substring(LEFT(CONVERT(A.DATE_BATCH, sql_char),10),9,2)) as USER_VCHR_DATE,CAST('                ' AS CHAR(16)) AS LAST_FILL,LTRIM('REG ') as REG from v_AP_OPEN_ITEMS a right outer join V_AP_INV_TAX_DTL g ON g.invoice = a.invoice AND g.BATCH_NUM = A.BATCH_NUM LEFT OUTER JOIN v_vendor_intl C ON A.VENDOR = C.VENDOR LEFT OUTER JOIN V_VENDOR_PAY_TO D ON A.VENDOR = D.VENDOR LEFT OUTER JOIN V_VENDOR_ADDL E on A.vendor = E.vendor LEFT OUTER JOIN V_VENDOR_MASTER F on A.vendor = F.vendor where a.batch_code = 10 and a.PURCHASE_ORDER = '' AND A.DATE_INVOICE = '{2}' and g.PAY_WITH_CARD = 0 order by INVOICE_ID",v.Args.CompCode,v.Local.sAttention,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF02VHDNPO","ConTemp",v.Local.sSQL)
+
+'f.Data.DataTable.AddExpressionColumn("INF28Hd","Group_ID","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+f.Intrinsic.string.Build("select a.INVOICE as Invoice_ID,RTRIM('001') as ROW_ID,RTRIM('DRC01') as BUSINESS_UNIT,concat('{0}',right(VOUCHER,5)) as VOUCHER_ID_RELATED,cast('     ' as char(5)) AS BUSINESS_UNIT_PO,cast('          ' as char(10)) AS PO_ID,RTRIM('00000') AS LINE_NBR,cast('   ' as char(3)) AS SCHED_NBR,cast('                              ' as char(30)) as DESCR,concat(RIGHT( '                             ' +  (cast(B.COST_INVOICED as varchar(27))),27),'0') as MERCHANDISE_AMT,cast('                                                  ' as char(50)) as FILLER,cast('                                    ' as char(36)) as FILLER1,RTRIM(' ') as SEQ from v_AP_OPEN_ITEMS a right outer join V_AP_INV_TAX_DTL b ON b.invoice = a.invoice AND B.BATCH_NUM = A.BATCH_NUM where a.batch_code = 10 and a.PURCHASE_ORDER = '' and a.date_invoice = '{1}' and b.PAY_WITH_CARD = 0",v.Args.CompCode,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF02VLNPO","ConTemp",v.Local.sSQL)
+
+f.Intrinsic.string.Build("select a.INVOICE as Invoice_ID,RTRIM('002') as ROW_ID,RTRIM('DRC01') as BUSINESS_UNIT,concat('{0}',right(VOUCHER,5)) as VOUCHER_ID_RELATED,cast('     ' as char(5))  AS BUSINESS_UNIT_GL,left(concat(c.user_1,'          '),10) AS  ACCOUNT,left(concat(c.user_2,'          '),10) AS  DEPTID,cast('                                                       ' as char(55)) as FILLER,RTRIM('501607') as product,LTRIM('2000 ') AS fund_code,left(concat(c.user_4,'     '),5) AS  CLASS_FLD,left(concat(c.user_3,'     '),5) AS   PROGRAM_CODE,cast('                                      ' as char(38)) as FILLER2,concat(RIGHT( '                             ' +  (cast(B.COST_INVOICED as varchar(27))),27),'0') as MERCHANDISE_AMT,cast('                                           ' as char(43)) as FILLER3,rtrim('{1}') AS CURRDATE from v_AP_OPEN_ITEMS a right outer join V_AP_INV_TAX_DTL b ON b.invoice = a.invoice AND B.BATCH_NUM = A.BATCH_NUM Left outer join V_GL_MASTER c on b.GL_ACCOUNT = c.GL_ACCOUNT where a.batch_code = 10 and a.PURCHASE_ORDER = '' and a.date_invoice = '{2}' and b.PAY_WITH_CARD = 0 ",v.Args.CompCode,v.Local.SlfDATE.Trim,v.Args.LongDt.trim,v.Local.sSQL)
+f.Data.DataTable.CreateFromSQL("INF02VDLNPO","ConTemp",v.Local.sSQL)
+
+f.Intrinsic.Control.For(v.Local.iCount,0,v.DataTable.INF02VHDNPO.RowCount--,1)
+	v.Local.sInvoice.Set(v.DataTable.INF02VHDNPO(v.Local.iCount).INVOICE_ID!fieldval)
+
+	f.Intrinsic.String.Build("INVOICE_ID = '{0}'",v.Local.sInvoice,v.Local.sFilter)
+	f.Data.DataView.Create("INF02VHDNPO","02VHDNPOVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToString("INF02VHDNPO","02VHDNPOVW","ROW_ID*!*BUSINESS_UNIT*!*VOUCHER_ID_RELATED*!*Invoice_ID*!*INVOICE_DT*!*VENDOR_SETID*!*VENDOR_ID*!*VNDR_LOC*!*ADDRESS_SEQ_NUM*!*ORIGIN*!*OPRID*!*ACCOUNTING_dt*!*GROSS_AMT*!*PYMNT_TERMS_CD*!*Fill_1*!*Fill_2*!*Fill_3*!*Fill_4*!*REMIT_ADDRESS_SEQ_NUM*!*VCHR_BLD_CODE*!*PYMNT_MESSAGE*!*PYMNT_HANDLING_CD*!*PYMNT_HOLD*!*PYMNT_HOLD_REASON*!*USER_VCHR_DATE*!*LAST_FILL*!*REG","","",V.Local.sOut)
+	F.Intrinsic.String.Replace(V.Local.sOut,"~","/",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF02,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF02)	
+	
+	f.Data.DataView.Create("INF02VLNPO","02VLNPOVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToDataTable("INF02VLNPO","02VLNPOVW","TempDT")
+	f.Data.DataTable.SetSeries("TempDT","SEQ",0,1)
+	f.Data.DataTable.AddExpressionColumn("TempDT","VOUCHER_LINE_NUM","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+	f.Data.dataview.Create("TempDT","TempVw",22)
+	f.Data.DataView.ToString("TempDT","TempVw","ROW_ID*!*BUSINESS_UNIT*!*VOUCHER_ID_RELATED*!*VOUCHER_LINE_NUM*!*BUSINESS_UNIT_PO*!*PO_ID*!*LINE_NBR*!*SCHED_NBR*!*DESCR*!*MERCHANDISE_AMT*!*FILLER*!*FILLER1","",v.Ambient.NewLine,V.Local.sOut)
+	F.Intrinsic.String.Replace(V.Local.sOut,"~","/",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF02,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF02)	
+	F.Data.DataView.Close("TempDT","TempVw")
+	f.Data.DataTable.Close("TempDT")
+	
+	f.Data.DataView.Create("INF02VDLNPO","02VDLNPOVW",22,v.Local.sFilter,"")
+	f.Data.DataView.ToDataTable("INF02VDLNPO","02VDLNPOVW","TempDT")
+	f.Data.DataTable.AddColumn("TempDT","SEQ","String")
+	f.Data.DataTable.SetSeries("TempDT","SEQ",0,1)
+	f.Data.DataTable.AddExpressionColumn("TempDT","VOUCHER_LINE_NUM","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+	f.Data.DataTable.AddExpressionColumn("TempDT","DISTRIB_LINE_NUM","String","IIF(Len(SEQ) = 1,'0000' + seq ,IIF(Len(SEQ) = 2,'000' + seq ,IIF(Len(SEQ) = 3,'00' + seq ,IIF(Len(SEQ) = 4,'0' + seq ,SEQ ))))")
+	f.Data.dataview.Create("TempDT","TempVw",22)
+	f.Data.DataView.ToString("TempDT","TempVw","ROW_ID*!*BUSINESS_UNIT*!*VOUCHER_ID_RELATED*!*VOUCHER_LINE_NUM*!*DISTRIB_LINE_NUM*!*BUSINESS_UNIT_GL*!*ACCOUNT*!*DEPTID*!*FILLER*!*product*!*fund_code*!*CLASS_FLD*!*PROGRAM_CODE*!*FILLER2*!*MERCHANDISE_AMT*!*FILLER3*!*CURRDATE","",v.Ambient.NewLine,V.Local.sOut)
+	F.Intrinsic.String.Replace(V.Local.sOut,"~","/",V.Local.sOut)
+	F.Intrinsic.string.Build("{0}{1}{2}",v.Global.sINF02,v.Local.sOut,v.Ambient.NewLine,v.Global.sINF02)	
+	F.Data.DataView.Close("TempDT","TempVw")
+	f.Data.DataTable.Close("TempDT")
+
+	
+	F.Data.DataView.Close("INF02VHDNPO","02VHDNPOVW")
+	F.Data.DataView.Close("INF02VLNPO","02VLNPOVW")
+	F.Data.DataView.Close("INF02VDLNPO","02VDLNPOVW")
+
+	
+	
+f.Intrinsic.Control.Next(v.Local.iCount)
+
+
+f.Data.DataTable.close("INF02VHDNPO")
+f.Data.DataTable.close("INF02VLNPO")
+f.Data.DataTable.close("INF02VDLNPO")
+f.Intrinsic.String.Build("{0}OK",v.Global.s02Out,v.Global.s02Out)
+f.ODBC.Connection!contemp.close
+f.Intrinsic.Control.catch
+f.Intrinsic.Control.CallSub(catching,"sub",v.Ambient.CurrentSubroutine,"errorno",v.Ambient.ErrorNumber,"errordesc",v.Ambient.ErrorDescription)
+f.Intrinsic.Control.EndTry
+
+
+
+Program.Sub.XPINF2802.End
+
+Program.Sub.cmdGenExp_Click.Start
+gui.FDateSel..Visible(True)
+gui.FDateSel..Enabled(False)
+f.Intrinsic.ui.InvokeWaitDialog("Export is running.")
+v.Global.dDate.Set(v.Screen.FDateSel!dtp1.Value)
+f.Intrinsic.Control.CallSub(ExportFiles)
+f.Intrinsic.UI.Msgbox("Export Completed.")
+f.Intrinsic.Control.CallSub(UnloadAll)
+f.Intrinsic.ui.CloseWaitDialog
+
+f.Intrinsic.Control.CallSub(UnloadAll)
+Program.Sub.cmdGenExp_Click.End
+
+Program.Sub.catching.Start
+v.Local.sError.declare(string)
+v.Local.sDate.Declare(String)
+f.Intrinsic.String.Build("{1}Error",v.Global.s02Out,v.Global.s02Out)
+f.Intrinsic.String.Replace(v.Global.dDate.String,"/","_",v.Local.sDate)
+
+f.Intrinsic.String.Build("{0}\{1}@Error.txt",v.Global.s02OutPath,v.Local.sDate,v.Global.s02OutPath)
+
+Function.Intrinsic.String.Concat(v.Ambient.Now,": Project: GCG_4926_OAKSExport.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",v.Args.sub,V.Ambient.NewLine,"Error Occurred ",V.Args.errorno," with description ",V.args.errordesc,V.Local.sError)
+f.Intrinsic.String.Build("Error in INF02 Export.{0}{1}{2}",v.Global.s02Out,v.Ambient.NewLine,v.local.sError,v.Global.s02Out)
+
+f.Intrinsic.file.String2File(v.Global.s02OutPath,v.Global.s02Out)
+
+'f.Intrinsic.UI.Msgbox(v.Local.sError)
+f.Intrinsic.Control.CallSub(UnLoadAll)
+Program.Sub.catching.End
